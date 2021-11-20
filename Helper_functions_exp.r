@@ -1,25 +1,6 @@
 
 ## DPD function  --------
 
-# d_n=function(beta,gamma,alpha,times,delta,covar){
-#   beta=as.vector(beta)
-#   gamma=as.numeric(gamma)
-#   alpha=as.numeric(alpha)
-#   
-#   uncen_covar=as.matrix(covar[which(delta==1),])
-#   cen_covar=as.matrix(covar[which(delta==0),])
-#   a1=exp(beta%*%t(uncen_covar))
-#   a2=exp(beta%*%t(cen_covar))
-#   a3=exp(beta%*%t(covar))
-#   a4=exp((-alpha)*gamma*times*a3)
-#   pt1=exp(-(1+alpha)*gamma*times[which(delta==1)]*a1)
-#   pt2=exp(-(1+alpha)*gamma*times[which(delta==0)]*a2)
-#   
-#   # d=((1/(alpha+1))*(sum((gamma*a1)^alpha)+sum(1/(gamma*a2))))-((1+(1/alpha))*sum(a4*((gamma*a3)^(alpha*delta))))
-#   d=(((1/(alpha+1))*sum((1-pt1)*(gamma*a1)^alpha))+sum(pt2))-((1+(1/alpha))*sum(a4*((gamma*a3)^(alpha*delta))))
-#   return(d)
-# }
-
 d_n=function(beta,gamma,alpha,times,delta,covar){
 
   beta=as.vector(beta)
@@ -254,15 +235,6 @@ J_n=function(beta,gamma,alpha,times,delta,covar){
 
 beta_grad_func_mle=function(beta,gamma,times,delta,covar){
   beta=as.vector(beta)
-  # gamma=as.numeric(gamma)
-  # 
-  # a1=exp(beta%*%t(covar))
-  # g=rep(0,ncol(covar))
-  # for(i in 1:nrow(covar))
-  # {
-  #   g=g+((delta[i]*covar[i,])-(gamma*times[i]*a1[i]*covar[i,]))
-  # }
-  # return(g)
   return(beta_grad_func_dpd(beta,gamma,0,times,delta,covar))
 }
 
@@ -272,16 +244,6 @@ beta_grad_func_mle=function(beta,gamma,times,delta,covar){
 
 beta_heis_func_mle=function(beta,gamma,times,delta,covar){
   beta=as.vector(beta)
-  # gamma=as.numeric(gamma)
-  # 
-  # a1=exp(beta%*%t(covar))
-  # h=matrix(0,ncol(covar),ncol(covar))
-  # for(i in 1:nrow(covar))
-  # {
-  #   h=h+(gamma*times[i]*a1[i]*(covar[i,]%*%t(covar[i,])))
-  # }
-  # h=-h
-  # return(h)
   return(beta_heis_func_dpd(beta,gamma,0,times,delta,covar))
 }
 
