@@ -1,3 +1,4 @@
+# Compute the MLE, perform tests for the regression coefficiencts, and compute the DIC under the PPH model (Nandy et al., 2020)
 
 mlePPH <- function(times,delta,covar,beta_ini,gamma_ini,baseline,Tol=0.00001,beta0=matrix(rep(0,length(beta_ini)),ncol=1)){
   
