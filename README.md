@@ -1,7 +1,15 @@
 # RobSurv
 
-# R codes for computing the MDPDE under the Parametric proportional Hazard models under 
+R codes for robust infenece under the Parametric proportional Hazard (PPH) models with random right censoring.
+
+**Estimation:** Minimum density power divergence estimator (MDPDE) as defined in Ghosh and Basu (2019).
+
+**Testing:** MDPDE based Wald-type testing procedures (Nandy et al., 2020)
+
+**Model selection criterion:** Denisty power divergence (DPD) based divergence information crietion (DIC) as discussed in Nady et al. (2020).  
+
 Parametric Baseline Functions available: Exponential & Weibull. 
+
 
 # References:
 
