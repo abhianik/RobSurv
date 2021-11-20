@@ -1,3 +1,4 @@
+# Simulate a random sample from Parametric proportiona hazard (PPH) model with agiven baseline (Exponential or Weibull)
 
 
 simPPH <- function(n,beta,gamma,baseline,Covmean = rep(0, length(beta)), Covsigma = diag(length(beta)), rateCens=0.01){
