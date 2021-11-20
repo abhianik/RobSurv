@@ -339,15 +339,6 @@ J_n=function(beta,gamma,alpha,times,delta,covar){
 
 beta_grad_func_mle=function(beta,gamma,times,delta,covar){
   beta=as.vector(beta)
-  # gamma=as.numeric(gamma)
-  # 
-  # a1=exp(beta%*%t(covar))
-  # g=rep(0,ncol(covar))
-  # for(i in 1:nrow(covar))
-  # {
-  #   g=g+((delta[i]*covar[i,])-(gamma*times[i]*a1[i]*covar[i,]))
-  # }
-  # return(g)
   return(beta_grad_func_dpd(beta,gamma,0,times,delta,covar))
 }
 
@@ -357,16 +348,6 @@ beta_grad_func_mle=function(beta,gamma,times,delta,covar){
 
 beta_heis_func_mle=function(beta,gamma,times,delta,covar){
   beta=as.vector(beta)
-  # gamma=as.numeric(gamma)
-  # 
-  # a1=exp(beta%*%t(covar))
-  # h=matrix(0,ncol(covar),ncol(covar))
-  # for(i in 1:nrow(covar))
-  # {
-  #   h=h+(gamma*times[i]*a1[i]*(covar[i,]%*%t(covar[i,])))
-  # }
-  # h=-h
-  # return(h)
   return(beta_heis_func_dpd(beta,gamma,0,times,delta,covar))
 }
 
