@@ -1,4 +1,4 @@
-
+# Function to find optimal alpha, by the procedure as described in Nady et al. (2020). 
 
 alphaOpt <- function(times,delta,covar,alpha_pilot,beta_ini,gamma_ini,baseline,Tol=0.00001,Range=seq(0,1,0.025)){
   
