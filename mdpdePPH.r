@@ -1,4 +1,4 @@
-
+# Compute the MDPDE, perform tests for the regression coefficiencts, and compute the DIC under the PPH model (Nandy et al., 2020)
 
 mdpdePPH <- function(times,delta,covar,alpha,beta_ini,gamma_ini,baseline,Tol=0.00001,beta0=matrix(rep(0,length(beta_ini)),ncol=1)){
   
@@ -38,9 +38,7 @@ mdpdePPH <- function(times,delta,covar,alpha,beta_ini,gamma_ini,baseline,Tol=0.0
     opt=optim(gamma_ini, h_n,method="L-BFGS-B",lower =lower)
     # # print(paste("Convergence message in optim = ",opt$convergence))
     gamma_new=opt$par
-    # print(gamma_new)
-    
-  
+      
       
     #Estimating beta using N-R
    
@@ -48,8 +46,6 @@ mdpdePPH <- function(times,delta,covar,alpha,beta_ini,gamma_ini,baseline,Tol=0.0
     while(dif2>Tol)
     {
       beta_new<-beta_ini-(solve(beta_heis_func_dpd(beta_ini,gamma_new,alpha,times,delta,covar))%*%beta_grad_func_dpd(beta_ini,gamma_new,alpha,times,delta,covar))
-      # print(beta_ini)
-      # print((beta_grad_func_dpd(beta_ini,gamma_new,alpha,times,delta,covar)))
       dif2=sqrt(sum((round(beta_new,5)-round(beta_ini,5))^2))
       beta_ini<-as.vector(beta_new)
     }
@@ -63,8 +59,6 @@ mdpdePPH <- function(times,delta,covar,alpha,beta_ini,gamma_ini,baseline,Tol=0.0
   
 gamma_est=gamma_new
 beta_est=beta_new
-# print(gamma_est)
-# print(beta_est)
 
 
 ## Compute asymptotic Standard Error in 'se' 
@@ -74,13 +68,12 @@ se=sqrt(diag(solve(J)%*%K%*%solve(J))/n)
 se_beta=se[1:p]
   if(s>1){se_gamma=se[(p+1):(p+s)]} 
   else {se_gamma=se[p+1]}
-# print(s)
 
 
 ## Perform Wald-type test for beta=beta0 (individually) & record P-values in 'PV'
 W<-((beta_est-beta0)/se_beta)^2   #Test statistics
 PV=1-pchisq(W,1) #p-values
-# print(PV)
+
 
 ## Compute DIC
 dic=(d_n(beta_est,gamma_est,alpha,times,delta,covar)/n)+(((alpha+1)/n)*tr(solve(J)%*%K))+(1/(alpha))
